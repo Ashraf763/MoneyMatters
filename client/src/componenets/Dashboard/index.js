@@ -2,17 +2,16 @@ import "./style.css";
 import { useEffect, useState } from "react";
 import WeeklyChart from "../WeeklyChart";
 import TransactionList from "../TransactionList";
+import LoadingView from "../LoadingView";
 
 function Dashboard() {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState({ credit: 0, debit: 0 });
-
-  const dummyFunc = () => {
-    console.log("Dashboard Mounted");
-  };
+  const [isLoading, setIsLoadong] = useState(true);
 
   const fetchlastTransactions = async () => {
     try {
+      setIsLoadong(true);
       const options = {
         method: "GET",
         headers: {
@@ -26,7 +25,7 @@ function Dashboard() {
 
       const response = await fetch(
         "https://bursting-gelding-24.hasura.app/api/rest/all-transactions?limit=3&offset=0",
-        options
+        options,
       );
       const responseData = await response.json();
       console.log(responseData.transactions);
@@ -34,7 +33,7 @@ function Dashboard() {
 
       const txn = await fetch(
         "https://bursting-gelding-24.hasura.app/api/rest/credit-debit-totals",
-        options
+        options,
       );
       const txnData = await txn.json();
 
@@ -43,17 +42,20 @@ function Dashboard() {
           acc[curr.type] = curr.sum;
           return acc;
         },
-        { credit: 0, debit: 0 }
+        { credit: 0, debit: 0 },
       );
       setSummary(formatted);
+      setIsLoadong(false);
     } catch (error) {
       console.error("Error fetching transactions:", error);
+    } finally {
+      setIsLoadong(false);
     }
   };
 
-  useEffect(dummyFunc, []);
+  useEffect(() => fetchlastTransactions, []);
 
-  return (
+  const displayDetails = () => (
     <div className="w-100">
       <div className="px-4 py-3 d-flex justify-content-between border-bottom">
         <h3 className="fs-5">Accounts</h3>
@@ -97,6 +99,8 @@ function Dashboard() {
       </div>
     </div>
   );
+
+  return isLoading ? <LoadingView /> : displayDetails();
 }
 
 export default Dashboard;
