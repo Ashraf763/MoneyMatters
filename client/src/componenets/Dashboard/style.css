@@ -1,0 +1,27 @@
+.main-dashboard {
+  background-color: #eeeff085;
+}
+
+.small-txt {
+  font-size: 0.8rem;
+}
+p {
+  color: #333b69;
+}
+
+@media (min-width: 768px) {
+  .chart-container {
+    max-height: 500px;
+  }
+}
+/* .chart-container {
+  height: 500px;
+  background-color: #f8f9fa;
+  background-color: #f0f0f0;
+
+} */
+
+/* 
+span {
+  font-weight: 500;
+} */

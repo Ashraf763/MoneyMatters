@@ -1,0 +1,12 @@
+.active-btn {
+  color: #007bff !important;
+  font-weight: 500;
+  border-bottom: #007bff 2px solid;
+}
+
+button {
+  border: 0;
+  background-color: transparent;
+  color: #718ebf;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,41 @@
+.sidebar li a:hover {
+  background-color: rgba(0, 68, 255, 0.479);
+}
+
+.header-logo {
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+}
+
+.white-text {
+  color: #ffffff;
+}
+
+Link,
+a,
+.nav-link,
+link {
+  color: white;
+}
+
+.nav-link {
+  color: #505887 !important;
+}
+
+.nav-link.active {
+  color: white !important;
+}
+
+.orange-text {
+  color: #f89a23;
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mail {
+  font-size: 0.6rem;
+}
